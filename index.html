@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ดาวน์โหลดแอป BanbanShop</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f0f2f5;
+            text-align: center;
+        }
+        .container {
+            padding: 40px;
+            background-color: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+        h1 {
+            font-size: 24px;
+            color: #1c1e21;
+        }
+        p {
+            color: #606770;
+            margin-bottom: 30px;
+        }
+        .download-button {
+            display: none; /* ซ่อนปุ่มไว้ก่อน */
+            padding: 15px 30px;
+            font-size: 18px;
+            font-weight: bold;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            text-decoration: none;
+            transition: background-color 0.3s;
+        }
+        #android-button { background-color: #4CAF50; } /* สีเขียว */
+        #ios-button { background-color: #007AFF; } /* สีน้ำเงิน */
+        .download-button:hover { opacity: 0.9; }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <!--  คุณสามารถใส่โลโก้แอปของคุณตรงนี้ -->
+        <img src="icon.png" alt="App Logo" style="border-radius: 20px; margin-bottom: 20px; width: 150px;">
+        <h1>ดาวน์โหลด BanbanShop</h1>
+        <p>สแกน QR Code สำเร็จ!<br>กรุณาเลือกปุ่มดาวน์โหลดสำหรับอุปกรณ์ของคุณ</p>
+
+        <!-- ปุ่มสำหรับ Android -->
+        <a id="android-button" class="download-button" href="#">ดาวน์โหลดสำหรับ Android (.apk)</a>
+
+        <!-- ปุ่มสำหรับ iOS -->
+        <a id="ios-button" class="download-button" href="#">ดาวน์โหลดผ่าน TestFlight</a>
+    </div>
+
+    <script>
+        // --- แก้ไข URL ของคุณตรงนี้ ---
+        const android_url = "YOUR_DIRECT_APK_DOWNLOAD_LINK_HERE"; // << ใส่ลิงก์ .apk ของคุณ
+        const ios_url = "YOUR_TESTFLIGHT_PUBLIC_LINK_HERE";       // << ใส่ลิงก์ TestFlight ของคุณ
+        // --------------------------------
+
+        document.addEventListener("DOMContentLoaded", function() {
+            const userAgent = navigator.userAgent || navigator.vendor || window.opera;
+            const androidButton = document.getElementById('android-button');
+            const iosButton = document.getElementById('ios-button');
+
+            androidButton.href = android_url;
+            iosButton.href = ios_url;
+
+            // ตรวจสอบว่าเป็น iOS (iPhone, iPad, iPod)
+            if (/iPad|iPhone|iPod/.test(userAgent) && !window.MSStream) {
+                iosButton.style.display = 'inline-block';
+            }
+            // ตรวจสอบว่าเป็น Android
+            else if (/android/i.test(userAgent)) {
+                androidButton.style.display = 'inline-block';
+            }
+            // ถ้าไม่ใช่ทั้งสองอย่าง ให้แสดงทั้งสองปุ่ม
+            else {
+                androidButton.style.display = 'inline-block';
+                iosButton.style.display = 'inline-block';
+            }
+        });
+    </script>
+
+</body>
+</html>
